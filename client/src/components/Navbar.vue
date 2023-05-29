@@ -6,7 +6,7 @@
 
         <ul class="navbar-menu">
             <li>
-               <router-link to="/create">Создать заявку</router-link> 
+               <router-link class="btn primary" to="/create">Создать заявку</router-link> 
             </li>
             <li>
                <router-link to="/analytics">Аналитика</router-link> 
