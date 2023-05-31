@@ -19,7 +19,7 @@
 
       <div class="form-control" :class="{ invalid: bError }">
         <label for="bDate">Дата рождения</label>
-        <input type="string" id="bDate" v-model="bDate" />
+        <input type="date" id="bDate" v-model="bDate" />
         <small v-if="bError">{{ bError }}</small>
       </div>
 

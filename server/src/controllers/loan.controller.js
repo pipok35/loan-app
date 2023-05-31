@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const getAllLoans = async (request, reply) => {
   const allLoans = await loanModel.find()
   if (allLoans.length === 0) {
-    throw new Error('Заявки не найдены')
+    throw new Error('Заявкиc не найдены')
   }
   return allLoans
 }

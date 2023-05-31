@@ -236,3 +236,15 @@ a {
 .table tbody tr:hover {
     background: #eee;
 }
+
+.pages {
+    display: flex;
+    margin-top: 15px;
+  }
+  .pageNumber {
+    border: 1px solid black;
+    padding: 10px;
+  }
+  .current-page {
+    border: 2px solid teal;
+  }
