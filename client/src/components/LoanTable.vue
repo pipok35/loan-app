@@ -19,12 +19,12 @@
         <td>{{ idx + 1 }}</td>
         <td>{{ loan.fio }}</td>
         <td>{{ loan.gender }}</td>
-        <td>{{ loan.bDate }}</td>
-        <td>{{ loan.amount }}</td>
+        <td>{{ date(new Date(loan.bDate)) }}</td>
+        <td>{{ currency(loan.amount) }}</td>
         <td>{{ loan.measureTime }}</td>
         <td>{{ loan.time }}</td>
         <td>
-          <router-link :to="{name: 'Edit', params: {id: loan._id}}">
+          <router-link :to="{ name: 'Edit', params: { id: loan._id } }">
             <button class="btn primary" @click="navigate">Открыть</button>
           </router-link>
         </td>
@@ -34,9 +34,15 @@
 </template>
 
 <script>
+import { currency } from '../use/currency'
+import { date } from '../use/date'
+
 export default {
   props: ['loans'],
 
+  setup(props) {
+    return {currency, date}
+  }
 }
 </script>
 

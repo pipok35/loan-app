@@ -1,12 +1,16 @@
 <template>
   <div class="card">
     <h1>Список заявок</h1>
-    <loan-table :loans="loans"></loan-table>
-    <div class="pages">
+    <Select
+        v-model="selectedSort"
+        :options="sortOptions"
+      />
+    <loan-table :loans="sortedLoans"></loan-table>
+    <div class="pagination">
       <div
         v-for="pageNumber in totalPages"
         :key="pageNumber"
-        class="pageNumber"
+        class="page"
         :class="{
           'current-page': page === pageNumber,
         }"
@@ -20,9 +24,11 @@
 
 <script>
 import LoanTable from '../components/LoanTable.vue'
+import Select from '../components/Select.vue'
 import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import axios from '../axios/common-http'
+import useSortLoans from '../use/useSortLoans'
 
 export default {
   setup() {
@@ -31,6 +37,12 @@ export default {
     const totalPages = ref(0)
     const limit = 10
     const page = ref(1)
+    const sortOptions = [
+        {value: 'time', name: 'По сроку займа'},
+        {value: 'amount', name: 'По сумме займа'},
+        {value: 'gender', name: 'По полу'},
+        {value: 'bDate', name: 'По возрасту'},
+    ]
 
     const fetching = async (start, end) => {
       try {
@@ -43,6 +55,8 @@ export default {
     }
 
     onMounted(() => fetching(0, 10))
+
+    const {sortedLoans, selectedSort} = useSortLoans(loans);
 
     const changePage = (pageNumber) => {
       page.value = pageNumber
@@ -57,10 +71,13 @@ export default {
       totalPages,
       changePage,
       page,
+      sortOptions,
+      sortedLoans,
+      selectedSort
     }
   },
 
-  components: { LoanTable },
+  components: { LoanTable,Select },
 }
 </script>
 

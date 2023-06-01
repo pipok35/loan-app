@@ -7,6 +7,7 @@ async function loanRoutes (fastify, options) {
     fastify.get('/loans/:id', loanController.getLoan)
     fastify.delete('/loans/:id', loanController.deleteLoan)
     fastify.put('/loans/:id', loanController.updateLoan)
+    fastify.get('/analytics', loanController.countLoansByDate)
   }
   
   module.exports = loanRoutes

@@ -97,8 +97,8 @@ export default {
         id: route.params.id,
         updateDate: new Date()
       }
-      console.log(data)
       await store.dispatch('loan/update', data)
+      router.push('/')
     }
 
     return {

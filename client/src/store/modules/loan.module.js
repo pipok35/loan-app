@@ -6,6 +6,7 @@ export default {
   state() {
     return {
       loans: [],
+      countsByDate: [],
       selectedSort: '',
       sortOptions: [
         { value: 'title', name: 'По названию' },
@@ -23,8 +24,20 @@ export default {
     setSelectedSort(state, selectedSort) {
       state.selectedSort = selectedSort
     },
+    setCountsByDate(state, countsByDate) {
+      state.countsByDate = countsByDate
+    },
   },
   actions: {
+    async loadLoansByDate({ commit}) {
+      try {
+        const {data} = await axios.get('/analytics')
+        const loansByDate = data
+        commit('setLoansByDate', loansByDate)
+      } catch (e) {
+        console.log(e)
+      }
+    },
     async create({ commit, dispatch }, payload) {
       try {
         const { data } = await axios.post('/loans', payload)
@@ -119,5 +132,11 @@ export default {
         post1[state.selectedSort]?.localeCompare(post2[state.selectedSort])
       )
     },
+    dates(state) {
+      return [...state.loans]
+    },
+    countsByDate(state) {
+      return [...state.countsByDate]
+    }
   },
 }

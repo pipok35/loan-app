@@ -1,10 +1,11 @@
+const { replaceOne } = require('../models/loan.model');
 const loanModel = require('../models/loan.model')
 const { v4: uuidv4 } = require('uuid');
 
 const getAllLoans = async (request, reply) => {
   const allLoans = await loanModel.find()
   if (allLoans.length === 0) {
-    throw new Error('Заявкиc не найдены')
+    throw new Error('Заявки не найдены')
   }
   return allLoans
 }
@@ -33,10 +34,30 @@ const updateLoan = async (request, reply) => {
     reply.code(200).send(loan)
 }
 
+const countLoansByDate = async(request, reply) => {
+  const loansByDate = await loanModel.aggregate([
+    {
+      '$group': {
+        '_id': {
+          '$dateToString': {
+            'format': '%Y-%m-%d', 
+            'date': '$creationDate'
+          }
+        }, 
+        'loansAtThisDate': {
+          '$sum': 1
+        }
+      }
+    }
+  ])
+  return loansByDate
+}
+
 module.exports = {
   getAllLoans,
   createLoan,
   getLoan,
   deleteLoan,
-  updateLoan
+  updateLoan,
+  countLoansByDate
 }

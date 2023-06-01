@@ -6,11 +6,11 @@ const loanSchema = new Schema({
   id: {type: String, default: uuidv4},
   fio: { type: String, required: true},
   gender: { type: String, required: true},
-  bDate: { type: String, required: true},
+  bDate: { type: Date, required: true},
   amount: { type: Number, required: true},
   time: { type: Number, required: true},
   measureTime: { type: String, required: true},
-  creationDate: { type: Date, default: new Date(), required: true },
+  creationDate: { type: String, default: new Date(), required: true },
   updateDate: { type: Date}
 });
 

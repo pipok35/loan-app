@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar">
         <h3>
-            <router-link to="/">Credit App</router-link>
+            <router-link style="color: #2c3e50;" to="/">LOAN APP</router-link>
         </h3>
 
         <ul class="navbar-menu">
