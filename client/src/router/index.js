@@ -5,30 +5,30 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/analytics',
     name: 'Analytics',
-    component: () => import('../views/Analytics.vue')
+    component: () => import('../views/Analytics.vue'),
   },
   {
     path: '/create',
     name: 'Create',
-    component: () => import('../views/Create.vue')
+    component: () => import('../views/Create.vue'),
   },
   {
     path: '/edit/:id',
     name: 'Edit',
-    component: () => import('../views/Edit.vue')
-  }
+    component: () => import('../views/Edit.vue'),
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   linkActiveClass: 'active',
-  linkExactActiveClass: 'active'
+  linkExactActiveClass: 'active',
 })
 
 export default router

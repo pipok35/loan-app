@@ -1,5 +1,5 @@
 <template>
-  <label for="select-sort"><h3>Отсортировать: </h3></label>
+  <label for="select-sort"><h3>Отсортировать:</h3></label>
   <div class="form-control">
     <select
       id="select-sort"
@@ -7,7 +7,6 @@
       :v-model="modelValue"
       @change="changeOption"
     >
-      <option disabled value="">Выберите из списка</option>
       <option
         v-for="option in options"
         :key="option.value"

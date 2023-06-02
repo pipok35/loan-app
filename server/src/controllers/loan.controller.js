@@ -1,6 +1,4 @@
-const { replaceOne } = require('../models/loan.model');
 const loanModel = require('../models/loan.model')
-const { v4: uuidv4 } = require('uuid');
 
 const getAllLoans = async (request, reply) => {
   const allLoans = await loanModel.find()

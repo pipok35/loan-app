@@ -41,8 +41,8 @@ export default {
   props: ['loans'],
 
   setup(props) {
-    return {currency, date}
-  }
+    return { currency, date }
+  },
 }
 </script>
 

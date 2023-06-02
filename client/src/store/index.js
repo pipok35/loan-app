@@ -13,17 +13,17 @@ export default createStore({
     },
     clearMessage(state) {
       state.message = null
-    }
+    },
   },
   actions: {
-    setMessage({commit}, message) {
+    setMessage({ commit }, message) {
       commit('setMessage', message)
       setTimeout(() => {
         commit('clearMessage')
       }, 4000)
-    }
+    },
   },
   modules: {
-    loan
-  }
+    loan,
+  },
 })

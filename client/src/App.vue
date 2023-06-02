@@ -3,16 +3,12 @@
 </template>
 
 <script>
-import MainLayout from './layout/MainLayout.vue';
-  
+import MainLayout from './layout/MainLayout.vue'
+
 export default {
-    setup() {
-      
-    },
-    components: {MainLayout}
-  }
+  setup() {},
+  components: { MainLayout },
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -1,11 +1,12 @@
 <template>
   <div class="card">
     <h1>Список заявок</h1>
-    <Select
-        v-model="selectedSort"
-        :options="sortOptions"
-      />
-    <loan-table :loans="sortedLoans"></loan-table>
+    <div class="form-control">
+      <h3>Поиск по имени: </h3>
+      <input v-model="searchQuery" placeholder="Введите имя" />
+    </div>
+    <Select v-model="selectedSort" :options="sortOptions" />
+    <loan-table :loans="searchSortedLoans"></loan-table>
     <div class="pagination">
       <div
         v-for="pageNumber in totalPages"
@@ -25,10 +26,11 @@
 <script>
 import LoanTable from '../components/LoanTable.vue'
 import Select from '../components/Select.vue'
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import axios from '../axios/common-http'
 import useSortLoans from '../use/useSortLoans'
+import useSearchLoans from '../use/useSearchLoans'
 
 export default {
   setup() {
@@ -38,11 +40,13 @@ export default {
     const limit = 10
     const page = ref(1)
     const sortOptions = [
-        {value: 'time', name: 'По сроку займа'},
-        {value: 'amount', name: 'По сумме займа'},
-        {value: 'gender', name: 'По полу'},
-        {value: 'bDate', name: 'По возрасту'},
+      { value: 'time', name: 'По сроку займа' },
+      { value: 'amount', name: 'По сумме займа' },
+      { value: 'gender', name: 'По полу' },
+      { value: 'bDate', name: 'По возрасту' },
     ]
+    const { sortedLoans, selectedSort } = useSortLoans(loans)
+    const { searchQuery, searchSortedLoans } = useSearchLoans(sortedLoans)
 
     const fetching = async (start, end) => {
       try {
@@ -55,8 +59,6 @@ export default {
     }
 
     onMounted(() => fetching(0, 10))
-
-    const {sortedLoans, selectedSort} = useSortLoans(loans);
 
     const changePage = (pageNumber) => {
       page.value = pageNumber
@@ -73,11 +75,13 @@ export default {
       page,
       sortOptions,
       sortedLoans,
-      selectedSort
+      selectedSort,
+      searchQuery,
+      searchSortedLoans,
     }
   },
 
-  components: { LoanTable,Select },
+  components: { LoanTable, Select },
 }
 </script>
 

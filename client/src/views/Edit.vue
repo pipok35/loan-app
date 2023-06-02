@@ -55,7 +55,6 @@
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import moment from 'moment'
 
 export default {
   setup() {
